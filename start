@@ -1,0 +1,9 @@
+#!/bin/bash
+docker system prune -f
+docker volume rm user_kong-config
+docker volume rm user_kong-data
+docker compose up -d
+docker compose down
+docker compose run --rm kong kong migrations bootstrap
+docker compose run --rm kong kong migrations list
+docker compose up -d
